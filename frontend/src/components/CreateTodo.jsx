@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const CreateTodo = () => {
+export const CreateTodo = ({refresh, setRefresh}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const clickHandler = async () => {
@@ -14,6 +14,7 @@ export const CreateTodo = () => {
         "content-Type": "application/json",
       },
     });
+    setRefresh(!refresh)
     console.log("Todo created successfully");
   };
   return (

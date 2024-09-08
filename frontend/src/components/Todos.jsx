@@ -1,12 +1,12 @@
-export const Todo = ({todos}) => {
+export const Todo = ({todos, refresh, setRefresh}) => {
     return <div>
         {
             todos.map((todo) => {
                 return <div>
                     <h1>{todo.title}</h1>
                     <h2>{todo.description}</h2>
-                    <button onClick={() => {
-                        fetch("http://localhost:3000/completed", {
+                    <button onClick={async () => {
+                        await fetch("http://localhost:3000/completed", {
                             method : "POST",
                             body : JSON.stringify({
                                 id : todo._id
@@ -15,6 +15,7 @@ export const Todo = ({todos}) => {
                                 "content-Type" : "application/json"
                             }
                         })
+                        setRefresh(!refresh)
                     }} disabled={todo.isCompleted}>{todo.isCompleted ? "Completed" : "Mark as complete"}</button>
                 </div>
             })
